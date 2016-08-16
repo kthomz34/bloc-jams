@@ -16,19 +16,34 @@ var albumPicasso = {
 
 // Another Example 
 var albumMarconi = {
-     title: 'The Telephone',
-     artist: 'Guglielmo Marconi',
-     label: 'EM',
-     year: '1909',
-     albumArtUrl: 'assets/images/album_covers/20.png',
-     songs: [
-         { title: 'Hello, Operator?', duration: '1:01' },
-         { title: 'Ring, ring, ring', duration: '5:01' },
-         { title: 'Fits in your pocket', duration: '3:21'},
-         { title: 'Can you hear me now?', duration: '3:14' },
-         { title: 'Wrong phone number', duration: '2:15'}
-     ]
- };
+    title: 'The Telephone',
+    artist: 'Guglielmo Marconi',
+    label: 'EM',
+    year: '1909',
+    albumArtUrl: 'assets/images/album_covers/20.png',
+    songs: [
+        { title: 'Hello, Operator?', duration: '1:01' },
+        { title: 'Ring, ring, ring', duration: '5:01' },
+        { title: 'Fits in your pocket', duration: '3:21'},
+        { title: 'Can you hear me now?', duration: '3:14' },
+        { title: 'Wrong phone number', duration: '2:15'}
+    ]
+};
+
+var albumHam = {
+    title: 'The Pit Roast',
+    artist: 'Piggy McPig',
+    label: 'Electric Wizard',
+    year: '1966',
+    albumArtUrl: 'assets/images/album_covers/19.png',
+    songs: [
+        { title: 'Hey its Sharp?', duration: '3:01' },
+        { title: 'Delicous', duration: '4:21' },
+        { title: 'Slow Cooked Ham', duration: '3:22'},
+        { title: 'Ham Dreams', duration: '3:15' },
+        { title: 'Pineapple Slices', duration: '6:66'}
+    ]
+};
 
 var createSongRow = function(songNumber, songName, songLength) {
     var template =
@@ -42,13 +57,14 @@ var createSongRow = function(songNumber, songName, songLength) {
     return template;
 }
 
-var setCurrentAlbum = function(album) {
-    //#1
+//#1
     var albumTitle = document.getElementsByClassName('album-view-title')[0];
     var albumArtist = document.getElementsByClassName('album-view-artist')[0];
     var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
     var albumImage = document.getElementsByClassName('album-cover-art')[0];
     var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
+    
+var setCurrentAlbum = function(album) {
     
     //#2
     albumTitle.firstChild.nodeValue = album.title;
@@ -67,5 +83,19 @@ var setCurrentAlbum = function(album) {
 
 window.onload = function() {
     setCurrentAlbum(albumPicasso);
+    
+    var albums = [albumPicasso, albumMarconi, albumHam];
+    var index = 0;
+    albumImage.addEventListener("click", function(event) {
+        setCurrentAlbum(albums[index]);
+        index++;
+        if (index == albums.length) {
+            index = 0;
+        }
+    });
 };
+
+
+
+
 
